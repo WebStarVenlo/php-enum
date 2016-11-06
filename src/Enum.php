@@ -232,6 +232,22 @@ abstract class Enum
 
         return self::$instances[$class][$name] = new $class(current($item), $ordinal);
     }
+    
+    /**
+     * Get an enumerator instance by the given value
+     *
+     * @param object $value The value of the enumerator
+     * @return static
+     * @throws \InvalidArgumentException On an invalid or unknown name
+     */
+    final public static function getByValue($value)
+    {
+        $class     = get_called_class();
+        $constants = parent::detectConstants($class);
+        $item      = array_search($value, $constants, true);
+
+        return self::getByName($item);
+    }
 
     /**
      * Clear all instantiated enumerators of the called class
