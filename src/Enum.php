@@ -243,7 +243,7 @@ abstract class Enum
     final public static function getByValue($value)
     {
         $class     = get_called_class();
-        $constants = parent::detectConstants($class);
+        $constants = self::detectConstants($class);
         $item      = array_search($value, $constants, true);
 
         return self::getByName($item);
